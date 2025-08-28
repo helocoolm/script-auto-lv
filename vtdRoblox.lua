@@ -1,7 +1,7 @@
 -- https://discord.gg/VDzUra2WFK
 
 
-shared.LoaderTitle = "Đăng Ký Kênh vtd Roblox";
+shared.LoaderTitle = "⚡Đăng Ký Kênh vtd Roblox đi ko chơi chùa đâu⚡";
 shared.LoaderKeyFrames = {
     [1] = {
         1,
@@ -105,7 +105,7 @@ local v8 = CreateObject("TextLabel", {
     Name = "UserName",
     Parent = v6,
     BackgroundTransparency = 1,
-    Text = "Youtube: vtd Roblox",
+    Text = "Youtube: vtd Roblox >=}",
     Position = UDim2.new(0, 75, 0, 10),
     Size = UDim2.new(0, 200, 0, 50),
     Font = Enum.Font.GothamBold,
@@ -314,58 +314,58 @@ v5:Destroy();
 local v14 = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();
 local v15 = v14:CreateWindow({
     Title = "vtd Roblox Hub",
-    SubTitle = "Blox Fruit",
+    SubTitle = "2.3.6",
     TabWidth = 160,
-    Theme = "light",
+    Theme = "Light",
     Acrylic = false,
     Size = UDim2.fromOffset(500, 320),
     MinimizeKey = Enum.KeyCode.End
 });
 local v16 = {
     Home = v15:AddTab({
-        Title = "Thông Tin"
+        Title = "Thông Tin📄"
     }),
     Main = v15:AddTab({
-        Title = "Cày"
+        Title = "Cày⛏️"
     }),
     Sea = v15:AddTab({
-        Title = "Sự Kiện"
+        Title = "Sự Kiện🎉"
     }),
     ITM = v15:AddTab({
-        Title = "Vật Phẩm"
+        Title = "Vật Phẩm📦"
     }),
     Setting = v15:AddTab({
-        Title = "Cài Đặt"
+        Title = "Cài Đặt💾"
     }),
     Status = v15:AddTab({
-        Title = "Máy Chủ"
+        Title = "Máy Chủ🇻🇳"
     }),
     Stats = v15:AddTab({
-        Title = "Chỉ Số"
+        Title = "Chỉ Số💪"
     }),
     Player = v15:AddTab({
-        Title = "Người Chơi"
+        Title = "Người Chơi👤"
     }),
     Teleport = v15:AddTab({
-        Title = "Dịch Chuyển"
+        Title = "Dịch Chuyển⚡"
     }),
     Visual = v15:AddTab({
-        Title = "Giả"
+        Title = "Giả🆘"
     }),
     Fruit = v15:AddTab({
-        Title = "Trái"
+        Title = "Trái🍊"
     }),
     Raid = v15:AddTab({
-        Title = "raid nek "
+        Title = "raid nek⚔️"
     }),
     Race = v15:AddTab({
-        Title = "Tộc"
+        Title = "Tộc♂️"
     }),
     Shop = v15:AddTab({
-        Title = "Cửa Hàng"
+        Title = "Cửa Hàng🛒"
     }),
     Misc = v15:AddTab({
-        Title = "Khác"
+        Title = "Khác⚫"
     })
 };
 local v17 = v14.Options;
@@ -2633,7 +2633,7 @@ v23.BorderSizePixel = 0;
 v23.Position = UDim2.new(0.120833337 - 0.1, 0, 0.0952890813 + 0.01, 0);
 v23.Size = UDim2.new(0, 50, 0, 50);
 v23.Draggable = true;
-v23.Image = "http://www.roblox.com/asset/?id=83190276951914";
+v23.Image = "http://www.roblox.com/asset/?id=128782544109877";
 v24.Parent = v23;
 v24.CornerRadius = UDim.new(0, 12);
 v25.Parent = v23;
@@ -4063,7 +4063,7 @@ if Sea3 then
             if not v513 then
                 v14:Notify({
                     Title = "vtd Roblox",
-                    Content = "Đảo Leviathan Tìm Thấy",
+                    Content = "thấy  Đảo Leviathan rồi kìa",
                     Duration = 10
                 });
                 v513 = true;
@@ -4098,7 +4098,7 @@ if Sea3 then
             end
         end
         if v621 then
-            v621.MaxSpeed = v508;
+            v621.MaxSpeed = v608;
             local v776 = CFrame.new(- 16217.7568359375, 9.126761436462402, 446.06536865234375);
             local v777 = v621.Position;
             local v778 = v776.Position;
@@ -4235,7 +4235,7 @@ if Sea3 then
         end
     });
     local v522 = v16.Sea:AddToggle("ToggleTerrorshark", {
-        Title = "Đấm Cá Mập",
+        Title = "gõ Cá Mập",
         Description = "",
         Default = false
     });
