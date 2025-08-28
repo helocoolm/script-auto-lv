@@ -1,0 +1,145 @@
+       local Window = MakeWindow({
+         Hub = {
+         Title = "vtd Roblox",
+         Animation = "Youtube: vtd Roblox"
+         },
+        Key = {
+        KeySystem = false,
+        Title = "Key System",
+        Description = "",
+        KeyLink = "",
+        Keys = {"1234"},
+        Notifi = {
+        Notifications = true,
+        CorrectKey = "đang chạy script...",
+       Incorrectkey = "key ko đúng :((",
+       CopyKeyLink = "copy thành công "
+      }
+    }
+  })
+
+       MinimizeButton({
+       Image = "http://www.roblox.com/asset/?id=96543430071872",
+       Size = {60, 60},
+       Color = Color3.fromRGB(10, 10, 10),
+       Corner = true,
+       Stroke = false,
+       StrokeColor = Color3.fromRGB(255, 0, 0)
+      })
+      
+------ Tab
+     local Tab1o = MakeTab({Name = "Script cày level"})
+     
+------- BUTTON
+    
+    AddButton(Tab1o, {
+     Name = "Redz Hub",
+    Callback = function()
+	  local Settings = {
+  JoinTeam = "Pirates"; -- Pirates/Marines
+  Translator = true; -- true/false
+}
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/refs/heads/main/Source.lua"))(Settings)
+  end
+  }) 
+  
+  AddButton(Tab1o, {
+     Name = "chưa có script..",
+    Callback = function()
+	  local Settings = {
+		
+		
+		
+		
+		
+		--// ANTI BAN PROTECTION V2
+-- Giảm rủi ro bị detect, chặn Kick/Ban/Log và fake data
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local HttpService = game:GetService("HttpService")
+local player = Players.LocalPlayer
+
+local oldNamecall
+local oldIndex
+local oldNewIndex
+
+-- ⚡ 1. Chặn Kick/Ban
+oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
+    local method = getnamecallmethod()
+    local args = {...}
+    if not checkcaller() then
+        if tostring(method) == "Kick" or tostring(method) == "Ban" then
+            warn("[ANTI BAN] Chặn lệnh:", method, args[1] or "")
+            return nil
+        end
+    end
+    return oldNamecall(self, unpack(args))
+end)
+
+-- ⚡ 2. Chặn truy cập Kick/Ban bằng __index
+oldIndex = hookmetamethod(game, "__index", function(self, key)
+    if not checkcaller() then
+        if key == "Kick" or key == "Ban" then
+            warn("[ANTI BAN] Truy cập Kick/Ban bị chặn")
+            return function() return nil end
+        end
+    end
+    return oldIndex(self, key)
+end)
+
+-- ⚡ 3. Chặn thay đổi dữ liệu nhạy cảm (__newindex)
+oldNewIndex = hookmetamethod(game, "__newindex", function(self, key, value)
+    if not checkcaller() then
+        if tostring(self) == "WalkSpeed" or tostring(self) == "JumpPower" or tostring(self) == "HipHeight" then
+            warn("[ANTI BAN] Server cố thay đổi "..key..", blocked!")
+            return
+        end
+    end
+    return oldNewIndex(self, key, value)
+end)
+
+-- ⚡ 4. Fake Ping/FPS/Memory để không bị log bất thường
+local fakePing = math.random(80, 120)
+local fakeFPS = math.random(50, 70)
+local fakeMemory = math.random(200, 400)
+
+RunService.Heartbeat:Connect(function()
+    setfpscap(fakeFPS)
+    if player:FindFirstChild("PlayerGui") then
+        if player.PlayerGui:FindFirstChild("Stats") then
+            player.PlayerGui.Stats.Ping.Text = tostring(fakePing).." ms"
+            player.PlayerGui.Stats.FPS.Text = tostring(fakeFPS)
+            player.PlayerGui.Stats.Memory.Text = tostring(fakeMemory).." MB"
+        end
+    end
+end)
+
+-- ⚡ 5. Chặn remote suspicious (ví dụ report, ban log)
+if ReplicatedStorage:FindFirstChild("Remotes") then
+    for _, remote in pairs(ReplicatedStorage.Remotes:GetChildren()) do
+        if remote:IsA("RemoteEvent") or remote:IsA("RemoteFunction") then
+            if string.find(remote.Name:lower(), "ban") or string.find(remote.Name:lower(), "report") or string.find(remote.Name:lower(), "log") then
+                remote:Destroy()
+                warn("[ANTI BAN] Đã xóa remote nguy hiểm:", remote.Name)
+            end
+        end
+    end
+end
+
+-- ⚡ 6. Reset danh tính session (nếu bị theo dõi)
+local function resetIdentity()
+    player.Name = "Guest_"..tostring(math.random(1000,9999))
+    player.DisplayName = "Guest_"..tostring(math.random(1000,9999))
+end
+
+-- Auto reset mỗi 300s để tránh tracking
+task.spawn(function()
+    while task.wait(300) do
+        resetIdentity()
+    end
+end)
+
+warn("[ANTI BAN PRO] Đã kích hoạt thành công ✅ - Bảo vệ an toàn hơn nhiều!")
