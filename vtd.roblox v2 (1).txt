@@ -314,7 +314,7 @@ v5:Destroy();
 local v14 = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();
 local v15 = v14:CreateWindow({
     Title = "vtd Roblox Hub",
-    SubTitle = "2.3.8",
+    SubTitle = "2.3.9",
     TabWidth = 160,
     Theme = "Light",
     Acrylic = false,
@@ -2683,6 +2683,13 @@ v16.Home:AddButton({
         setclipboard("https://https://discord.gg/VDzUra2WFK");
     end
 });
+v16.Home:AddButton({
+    Title = "youtube",
+    Description = "xem video ",
+    Callback = function()
+        setclipboard("https://youtube.com/@vtd.roblox1?si=TOynN8y3a6s7K9aC");
+     end
+}); 
 _G.FastAttackStrix_Mode = "Super Fast Attack";
 spawn(function()
     while wait() do
@@ -2747,8 +2754,8 @@ local v49 = v16.Main:AddToggle("ToggleLevel", {
     Default = false
 });
 v49:OnChanged(function(v237)
-    _G.AutoLevel = v237;
-    if (v237 == false) then
+    _G.AutoLevel = v2650;
+    if (v2650 == false) then
         wait();
         Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame);
         wait();
@@ -2802,7 +2809,7 @@ spawn(function()
     end
 end);
 local v50 = v16.Main:AddToggle("ToggleMobAura", {
-    Title = "Đấm Quái Gần",
+    Title = "gõ Quái Gần",
     Description = "",
     Default = false
 });
@@ -2848,7 +2855,7 @@ spawn(function()
     end
 end);
 local v51 = v16.Main:AddToggle("ToggleCastleRaid", {
-    Title = "Đấm Hải Tặc",
+    Title = "gõ Hải Tặc",
     Description = "",
     Default = false
 });
@@ -2936,7 +2943,7 @@ spawn(function()
     end
 end);
 local v55 = v16.Main:AddToggle("ToggleCollectChest", {
-    Title = "Lụm Rương",
+    Title = "bú Rương",
     Description = "",
     Default = false
 });
@@ -3461,45 +3468,45 @@ end
 local v60 = v16.Main:AddSection("Trùm");
 if Sea1 then
     tableBoss = {
-        "The Gorilla King",
+        "Vua khỉ đột",
         "Bobby",
         "Yeti",
-        "Mob Leader",
+        "Thủ lĩnh đám đông",
         "Vice Admiral",
-        "Warden",
-        "Chief Warden",
-        "Swan",
-        "Magma Admiral",
-        "Fishman Lord",
+        "cai ngục",
+        "Trưởng cai ngục",
+        "thiên nga",
+        "Đô đốc magma",
+        "Chúa tể người cá",
         "Wysper",
-        "Thunder God",
-        "Cyborg",
-        "Saber Expert"
+        "Thần Sấm",
+        "người máy",
+        "Chuyên gia kiếm thuật"
     };
 elseif Sea2 then
     tableBoss = {
-        "Diamond",
+        "Kim cương",
         "Jeremy",
         "Fajita",
-        "Don Swan",
-        "Smoke Admiral",
-        "Cursed Captain",
-        "Darkbeard",
-        "Order",
-        "Awakened Ice Admiral",
-        "Tide Keeper"
+        "Don thiên nga",
+        "Đô đốc khói",
+        "thuyền trưởng bị nguyền rủa",
+        "râu đen",
+        "Đặt hàng",
+        "Đô đốc băng giá thức tỉnh",
+        "Người giữ thủy triều"
     };
 elseif Sea3 then
     tableBoss = {
-        "Stone",
-        "Hydra Leader",
-        "Kilo Admiral",
-        "Captain Elephant",
-        "Beautiful Pirate",
-        "rip_indra True Form",
-        "Longma",
-        "Soul Reaper",
-        "Cake Queen"
+        "Cục đá",
+        "Thủ lĩnh Hydra",
+        "Đô đốc Kilo",
+        "thuyền trưởng voi",
+        "Cướp biển xinh đẹp",
+        "rip_indra Dạng thật",
+        "Long mã",
+        "Tử thần",
+        "Nữ hoàng bánh ngọt"
     };
 end
 local v61 = v16.Main:AddDropdown("DropdownBoss", {
@@ -3854,13 +3861,13 @@ if Sea3 then
             end
         end
         local v593 = {
-            "ShipwreckIsland",
-            "SandIsland",
-            "TreeIsland",
-            "TinyIsland",
-            "MysticIsland",
-            "KitsuneIsland",
-            "FrozenDimension"
+            "Đảo đắm tàu",
+            "Đảo Cát",
+            "Cây Đảo",
+            "Đảo Nhỏ",
+            "Đảo Huyền Bí",
+            "Đảo Kitsune",
+            "Đảo Leviathan"
         };
         for v691, v692 in ipairs(v593) do
             local v693 = v507.Map:FindFirstChild(v692);
@@ -3948,13 +3955,13 @@ if Sea3 then
             end
         end
         local v604 = {
-            "ShipwreckIsland",
-            "SandIsland",
-            "TreeIsland",
-            "TinyIsland",
-            "PrehistoricIsland",
-            "KitsuneIsland",
-            "FrozenDimension"
+            "Đảo đắm tàu",
+            "Đảo Cát",
+            "Cây Đảo",
+            "Đảo Nhỏ",
+            "Đảo Huyền Bí",
+            "Đảo Kitsune",
+            "Đảo Leviathan"
         };
         for v701, v702 in ipairs(v604) do
             local v703 = v507.Map:FindFirstChild(v702);
@@ -4042,13 +4049,13 @@ if Sea3 then
             end
         end
         local v615 = {
-            "ShipwreckIsland",
-            "SandIsland",
-            "TreeIsland",
-            "TinyIsland",
-            "MysticIsland",
-            "KitsuneIsland",
-            "PrehistoricIsland"
+            "Đảo đắm tàu",
+            "dảo cát",
+            "đảo cây",
+            "đảo nhỏ",
+            "đảo bí ẩn",
+            "đảo kitsune",
+            "Đảo Thời Tiền Sử"
         };
         for v711, v712 in ipairs(v615) do
             local v713 = v507.Map:FindFirstChild(v712);
@@ -4164,7 +4171,7 @@ if Sea3 then
     });
     local v511 = {};
     local v518 = {
-        "Beast Hunter",
+        Beast Hunter",
         "Sleigh",
         "Miracle",
         "The Sentinel",
@@ -4179,7 +4186,7 @@ if Sea3 then
         "MarineSloop"
     };
     local v519 = v16.Sea:AddDropdown("DropdownBoat", {
-        Title = "Chọn Thuyền",
+        Title ="chọn thuyền",
         Description = "",
         Values = v518,
         Multi = false,
