@@ -1,4 +1,4 @@
--- Hellocun Speed Hub – Full Template with Info Tab --
+-- Hellocun Hub – Full Template with Info Tab --
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -143,3 +143,11 @@ for _, tabName in ipairs(tabNames) do
             if t.running then
                 t.toggleBtn.Text = "Stop " .. tabName
                 t.toggleBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 85)
+                MinimizeButton({
+       Image = "http://www.roblox.com/asset/?id=96543430071872",
+       Size = {60, 60},
+       Color = Color3.fromRGB(10, 10, 10),
+       Corner = true,
+       Stroke = false,
+       StrokeColor = Color3.fromRGB(255, 0, 0)
+      })
