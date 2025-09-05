@@ -1,153 +1,177 @@
--- Hellocun Hub – Full Template with Info Tab --
+--  hellocun GUI - Speed Style Trng Hng, Không Key, RED Event Support
+local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Rayfield/main/source"))()
 
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local lp = Players.LocalPlayer
+-- To GUI chính
+local Window = Rayfield:CreateWindow({
+    Name = " hellocun Hub | Speed Style",
+    LoadingTitle = "hellocun GUI",
+    LoadingSubtitle = "ang ti ...",
+    ConfigurationSaving = {
+        Enabled = false
+    },
+    Discord = {
+        Enabled = false
+    },
+    KeySystem = false
+})
 
-local VALID_KEY = "hellocunvip.111"
+--  Giao din trng hng pastel
+Rayfield:ChangeTheme({
+    Background = Color3.fromRGB(255, 255, 255),
+    Topbar = Color3.fromRGB(255, 182, 193),
+    Text = Color3.fromRGB(0, 0, 0),
+    ElementBackground = Color3.fromRGB(255, 240, 245),
+    ElementStroke = Color3.fromRGB(255, 182, 193),
+    SectionBackground = Color3.fromRGB(255, 240, 245),
+    Divider = Color3.fromRGB(255, 182, 193),
+    Slider = Color3.fromRGB(255, 182, 193),
+    Toggle = Color3.fromRGB(255, 182, 193),
+    Button = Color3.fromRGB(255, 182, 193),
+    Dropdown = Color3.fromRGB(255, 182, 193),
+    Input = Color3.fromRGB(255, 182, 193),
+    Notification = Color3.fromRGB(255, 182, 193)
+})
 
--- Create GUI
-local gui = Instance.new("ScreenGui", lp:WaitForChild("PlayerGui"))
-gui.Name = "HellocunHub"
+-- Tabs
+local autoTab = Window:CreateTab(" Auto")
+local infoTab = Window:CreateTab(" Info")
 
-local mainFrame = Instance.new("Frame", gui)
-mainFrame.Size = UDim2.new(0, 560, 0, 540)
-mainFrame.Position = UDim2.new(0.5, -280, 0.5, -270)
-mainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-mainFrame.BorderSizePixel = 0
-mainFrame.Active = true
-mainFrame.Draggable = true
-
--- Title Bar (Red)
-local titleBar = Instance.new("Frame", mainFrame)
-titleBar.Size = UDim2.new(1, 0, 0, 50)
-titleBar.BackgroundColor3 = Color3.fromRGB(220, 20, 60)
-
-local titleLabel = Instance.new("TextLabel", titleBar)
-titleLabel.Size = UDim2.new(1, 0, 1, 0)
-titleLabel.BackgroundTransparency = 1
-titleLabel.Text = "Hellocun Hub"
-titleLabel.TextColor3 = Color3.new(1,1,1)
-titleLabel.Font = Enum.Font.SourceSansBold
-titleLabel.TextSize = 30
-
--- Tab bar (Green)
-local tabBar = Instance.new("Frame", mainFrame)
-tabBar.Size = UDim2.new(1, 0, 0, 45)
-tabBar.Position = UDim2.new(0, 0, 0, 50)
-tabBar.BackgroundTransparency = 1
-
-local tabNames = {
-    "Auto Raid", "Auto Up Sea", "Auto Level", "Sea Event",
-    "Event Lightning", "RED Event", "Auto Up V4", "Ðánh Quái",
-    "Tele+Ðánh Ngu?i", "Info"
-}
-
-local tabButtons = {}
-local contentFrames = {}
-
--- Functions to build UI
-local function createTabButton(name, index, total)
-    local btn = Instance.new("TextButton", tabBar)
-    btn.Size = UDim2.new(1/total, 0, 1, 0)
-    btn.Position = UDim2.new((index-1)/total, 0, 0, 0)
-    btn.BackgroundColor3 = Color3.fromRGB(0, 170, 85)
-    btn.TextColor3 = Color3.new(1,1,1)
-    btn.Font = Enum.Font.SourceSansBold
-    btn.TextSize = 16
-    btn.Text = name
-    btn.MouseEnter:Connect(function() btn.BackgroundColor3 = Color3.fromRGB(0, 210, 105) end)
-    btn.MouseLeave:Connect(function()
-        if not contentFrames[name].Visible then btn.BackgroundColor3 = Color3.fromRGB(0, 170, 85) end
-    end)
-    return btn
-end
-
-local function createContentFrame()
-    local f = Instance.new("Frame", mainFrame)
-    f.Size = UDim2.new(1, 0, 1, -95)
-    f.Position = UDim2.new(0, 0, 0, 95)
-    f.BackgroundTransparency = 1
-    f.Visible = false
-    return f
-end
-
-local function createKeyToggleUI(parent, buttonText)
-    local keyBox = Instance.new("TextBox", parent)
-    keyBox.Size = UDim2.new(0, 260, 0, 35)
-    keyBox.Position = UDim2.new(0, 15, 0, 15)
-    keyBox.PlaceholderText = "Nh?p key"
-    keyBox.TextSize = 20
-    keyBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    keyBox.TextColor3 = Color3.new(1,1,1)
-    keyBox.Font = Enum.Font.SourceSans
-
-    local toggleBtn = Instance.new("TextButton", parent)
-    toggleBtn.Size = UDim2.new(0, 260, 0, 40)
-    toggleBtn.Position = UDim2.new(0, 15, 0, 60)
-    toggleBtn.Text = buttonText
-    toggleBtn.Font = Enum.Font.SourceSansBold
-    toggleBtn.TextSize = 22
-    toggleBtn.BackgroundColor3 = Color3.fromRGB(220, 20, 60)
-    toggleBtn.TextColor3 = Color3.new(1,1,1)
-
-    local statusLabel = Instance.new("TextLabel", parent)
-    statusLabel.Size = UDim2.new(1, -30, 0, 25)
-    statusLabel.Position = UDim2.new(0, 15, 1, -40)
-    statusLabel.BackgroundTransparency = 1
-    statusLabel.TextColor3 = Color3.fromRGB(255, 255, 0)
-    statusLabel.Font = Enum.Font.SourceSans
-    statusLabel.TextSize = 16
-    statusLabel.Text = ""
-
-    return keyBox, toggleBtn, statusLabel
-end
-
--- Build tabs & content
-for i, name in ipairs(tabNames) do
-    tabButtons[i] = createTabButton(name, i, #tabNames)
-    contentFrames[name] = createContentFrame()
-end
-
-contentFrames[tabNames[1]].Visible = true
-tabButtons[1].BackgroundColor3 = Color3.fromRGB(0, 210, 105)
-
-for i, btn in ipairs(tabButtons) do
-    btn.MouseButton1Click:Connect(function()
-        for _, frame in pairs(contentFrames) do frame.Visible = false end
-        for _, b in ipairs(tabButtons) do b.BackgroundColor3 = Color3.fromRGB(0, 170, 85) end
-        contentFrames[tabNames[i]].Visible = true
-        btn.BackgroundColor3 = Color3.fromRGB(0, 210, 105)
-    end)
-end
-
--- Setup toggle visuals
-local toggles = {}
-for _, tabName in ipairs(tabNames) do
-    local frame = contentFrames[tabName]
-    if tabName ~= "Info" then
-        local keyBox, toggleBtn, statusLabel = createKeyToggleUI(frame, "Start " .. tabName)
-        toggles[tabName] = {
-            keyBox = keyBox,
-            toggleBtn = toggleBtn,
-            statusLabel = statusLabel,
-            running = false
-        }
-        toggleBtn.MouseButton1Click:Connect(function()
-            local t = toggles[tabName]
-            if t.keyBox.Text ~= VALID_KEY then
-                t.statusLabel.Text = "Key không dúng!"
-                return
+--  Auto Câu Cá
+autoTab:CreateToggle({
+    Name = " Auto Câu Cá",
+    CurrentValue = false,
+    Callback = function(Value)
+        _G.AutoFish = Value
+        spawn(function()
+            while _G.AutoFish do
+                task.wait(1)
+                local tool = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+                if tool and tool:FindFirstChild("RemoteEvent") then
+                    tool.RemoteEvent:FireServer("Cast")
+                    task.wait(2)
+                    tool.RemoteEvent:FireServer("Catch")
+                end
             end
-            t.running = not t.running
-            if t.running then
-                t.toggleBtn.Text = "Stop " .. tabName
-                t.toggleBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 85)
-                MinimizeButton({
-       Image = "http://www.roblox.com/asset/?id=96543430071872",
-       Size = {60, 60},
-       Color = Color3.fromRGB(10, 10, 10),
-       Corner = true,
-       Stroke = false,
-       StrokeColor = Color3.fromRGB(255, 0, 0)
-      })
+        end)
+    end
+})
+
+--  Auto Farm Level (simple version)
+autoTab:CreateToggle({
+    Name = " Auto Farm Level",
+    CurrentValue = false,
+    Callback = function(Value)
+        _G.AutoFarm = Value
+        spawn(function()
+            while _G.AutoFarm do
+                task.wait()
+                pcall(function()
+                    local enemies = workspace.Enemies and workspace.Enemies:GetChildren()
+                    for _, mob in pairs(enemies or {}) do
+                        if mob:FindFirstChild("HumanoidRootPart") and mob:FindFirstChild("Humanoid") and mob.Humanoid.Health > 0 then
+                            local player = game.Players.LocalPlayer
+                            local char = player.Character
+                            if char and char:FindFirstChild("HumanoidRootPart") then
+                                char:PivotTo(mob.HumanoidRootPart.CFrame * CFrame.new(0, 10, 0))
+                                local tool = char:FindFirstChildOfClass("Tool")
+                                if tool then
+                                    tool:Activate()
+                                end
+                            end
+                            break
+                        end
+                    end
+                end)
+            end
+        end)
+    end
+})
+
+--  Auto RED EVENT Blox Fruits
+autoTab:CreateToggle({
+    Name = " Auto RED EVENT (Sea Beast - Blox Fruits)",
+    CurrentValue = false,
+    Callback = function(Value)
+        _G.AutoRed = Value
+        spawn(function()
+            while _G.AutoRed do
+                task.wait(0.5)
+                pcall(function()
+                    for _, obj in pairs(workspace:GetChildren()) do
+                        if obj:IsA("Model") and (obj.Name:find("SeaBeast") or obj.Name:find("Red") or obj.Name:find("Pirate")) then
+                            if obj:FindFirstChild("HumanoidRootPart") then
+                                local char = game.Players.LocalPlayer.Character
+                                if char and char:FindFirstChild("HumanoidRootPart") then
+                                    char:PivotTo(obj.HumanoidRootPart.CFrame * CFrame.new(0, 15, 0))
+                                    local tool = char:FindFirstChildOfClass("Tool")
+                                    if tool then
+                                        tool:Activate()
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end)
+            end
+        end)
+    end
+})
+
+--  Auto ánh Quái Có Hiu ng Sét (Lightning Farm)
+autoTab:CreateToggle({
+    Name = " Auto Lightning Farm",
+    CurrentValue = false,
+    Callback = function(Value)
+        _G.AutoLightningFarm = Value
+        spawn(function()
+            while _G.AutoLightningFarm do
+                task.wait(0.3)
+                pcall(function()
+                    local player = game.Players.LocalPlayer
+                    local char = player.Character
+                    if not char then return end
+
+                    local hrp = char:FindFirstChild("HumanoidRootPart")
+                    local tool = char:FindFirstChildOfClass("Tool")
+                    if not hrp or not tool then return end
+
+                    local enemies = workspace:FindFirstChild("Enemies")
+                    if not enemies then return end
+
+                    for _, mob in pairs(enemies:GetChildren()) do
+                        local mobHRP = mob:FindFirstChild("HumanoidRootPart")
+                        local mobHum = mob:FindFirstChild("Humanoid")
+                        if mobHRP and mobHum and mobHum.Health > 0 then
+                            -- Dch chuyn ti quái
+                            hrp.CFrame = mobHRP.CFrame * CFrame.new(0, 10, 0)
+
+                            -- ánh quái
+                            tool:Activate()
+
+                            -- To hiu ng sét
+                            local lightning = Instance.new("Part")
+                            lightning.Anchored = true
+                            lightning.CanCollide = false
+                            lightning.Size = Vector3.new(0.2, 20, 0.2)
+                            lightning.CFrame = CFrame.new(mobHRP.Position + Vector3.new(0, 10, 0))
+                            lightning.BrickColor = BrickColor.new("Electric blue")
+                            lightning.Material = Enum.Material.Neon
+                            lightning.Name = "LightningEffect"
+                            lightning.Parent = workspace
+
+                            game:GetService("Debris"):AddItem(lightning, 0.3)
+                            break
+                        end
+                    end
+                end)
+            end
+        end)
+    end
+})
+
+--  Info Tab
+infoTab:CreateParagraph({
+    Title = " Thông Tin Ngi Chi",
+    Content = "Tên: " .. game.Players.LocalPlayer.Name ..
+             "Level: " .. (game.Players.LocalPlayer:FindFirstChild("Data") and game.Players.LocalPlayer.Data.Level.Value or "???")
+})
